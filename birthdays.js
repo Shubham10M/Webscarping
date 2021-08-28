@@ -58,3 +58,35 @@ function getBirthDay(html) {
     console.log(name, " ", age);
 }
 console.log("After");
+// for sorthing the table -> bithdays - Dates
+function sortBirthDay(bowlersArr){
+    // sort
+   // age - >  convert
+   let newArr = bowlersArr.map(singleFn);
+   function singleFn(obj){
+   let name = obj.name; 
+   let age = obj.name;
+   let ageArr = obj.age.split(" ");
+   let years = ageArr[0].slice(0,ageArr[0].length-1);
+   let days = ageArr[1].slice(0, ageArr[1].length-1);
+   let ageInDays = Number(years) * 365 + Number(days);
+   return{
+       name : name,
+       ageInDays : ageInDays,
+       age : age
+   } 
+   }
+   let sortedArr = newArr.sort(cb);
+   // console.table(sortedArr);
+   function cb(objA, objB) {
+       return objA.ageInDays - objB.ageInDays;
+   }
+   let finalArr = sortedArr.map(removeageIndays);
+   function removeageIndays(obj) {
+       return {
+           name: obj.name,
+           age: obj.age
+       }
+   }
+   console.table(finalArr);
+}
